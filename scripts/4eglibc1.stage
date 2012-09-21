@@ -1,0 +1,28 @@
+_prepare eglibc ${EGLIBC_VERSION}
+
+rm -rf eglibc-build1
+mkdir -p eglibc-build1
+cd eglibc-build1
+
+BUILD_CC=gcc \
+CC=$TOOLS/bin/$TARGET-gcc \
+CXX=$TOOLS/bin/$TARGET-g++ \
+LD=$TOOLS/bin/$TARGET-ld \
+AR=$TOOLS/bin/$TARGET-ar \
+RANLIB=$TOOLS/bin/$TARGET-ranlib \
+../configure --prefix=/usr \
+	--with-headers=$SYSROOT/usr/include \
+	--build=$BUILD \
+	--host=$TARGET \
+	--disable-profile --without-gd --without-cvs \
+	--enable-add-ons &&
+make install-headers install_root=$SYSROOT install-bootstrap-headers=yes
+
+mkdir -p $SYSROOT/usr/lib
+make csu/subdir_lib
+cp csu/crt{1,i,n}.o $SYSROOT/usr/lib
+
+$TOOLS/bin/$TARGET-gcc -nostdlib -nostartfiles -shared -x c /dev/null \
+	-o $SYSROOT/usr/lib/libc.so
+
+# ex: ts=4 sw=4 ft=sh

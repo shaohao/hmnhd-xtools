@@ -1,0 +1,33 @@
+#!/bin/bash
+
+set -o nounset
+set -o errexit
+
+_prepare()
+{
+	local name=$1
+	local version=$2
+
+	local a p
+
+	if [[ $SRC/${name}-${version}.tar.bz2 ]]; then
+		# main package
+		tar xvf $SRC/${name}-${version}.tar.bz2
+		# add-ons
+		for a in $SRC/${name}-*-${version}.tar.bz2; do
+			if [[ -f $a ]]; then
+				tar xvf $a -C ${name}-${version}
+			fi
+		done
+		# patches
+		for p in `find $SRC/patches/${name}/${version} -name "*.patch"`; do
+			patch -d ${name}-${version} -p1 < $p
+		done
+
+		cd ${name}-${version}
+	fi
+}
+
+. $TOP/scripts/$1.stage || { echo "ERROR on stage $1"; exit 1; }
+
+# ex: ts=4 sw=4 ft=sh

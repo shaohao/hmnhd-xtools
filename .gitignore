@@ -1,0 +1,6 @@
+projects/
+sources/*.*
+!sources/patches
+rootfs
+tools
+build

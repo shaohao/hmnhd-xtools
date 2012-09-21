@@ -1,0 +1,19 @@
+_prepare gcc ${GCC_VERSION}
+
+rm -rf gcc-build3
+mkdir -p gcc-build3
+cd gcc-build3
+
+../configure \
+	--target=$TARGET --prefix=$TOOLS \
+	--with-sysroot=$SYSROOT \
+	--disable-libssp --disable-libgomp --disable-libmudflap --disable-libquadmath \
+	--enable-__cxa_atexit \
+	--enable-languages=c,c++ &&
+PATH=$TOOLS/bin:$PATH make &&
+PATH=$TOOLS/bin:$PATH make install
+
+cp -d $TOOLS/$TARGET/lib/libgcc_s.so* $SYSROOT/lib
+cp -d $TOOLS/$TARGET/lib/libstdc++.so* $SYSROOT/usr/lib
+
+# ex: ts=4 sw=4 ft=sh

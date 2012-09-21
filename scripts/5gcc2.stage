@@ -1,0 +1,14 @@
+_prepare gcc ${GCC_VERSION}
+
+rm -rf gcc-build2
+mkdir -p gcc-build2
+cd gcc-build2
+
+../configure --target=$TARGET --prefix=$TOOLS \
+	--with-sysroot=$SYSROOT \
+	--disable-libssp --disable-libgomp --disable-libmudflap --disable-libquadmath \
+	--enable-languages=c &&
+PATH=$TOOLS/bin:$PATH make &&
+PATH=$TOOLS/bin:$PATH make install
+
+# ex: ts=4 sw=4 ft=sh

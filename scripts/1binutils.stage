@@ -1,0 +1,14 @@
+_prepare binutils ${BINUTILS_VERSION}
+
+rm -rf binutils-build
+mkdir -p binutils-build
+cd binutils-build
+
+../configure --target=$TARGET --prefix=$TOOLS \
+	--build=$BUILD --host=$HOST \
+	--disable-werror \
+	--with-sysroot=$SYSROOT &&
+make &&
+make install
+
+# ex: ts=4 sw=4 ft=sh

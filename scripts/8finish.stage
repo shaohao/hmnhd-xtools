@@ -1,0 +1,1 @@
+find $TOOLS -type d | xargs chmod -w

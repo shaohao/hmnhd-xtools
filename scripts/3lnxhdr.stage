@@ -1,0 +1,7 @@
+_prepare linux ${LINUX_VERSION}
+
+PATH=$TOOLS/bin:$PATH make headers_install \
+	ARCH=arm CROSS_COMPILE=$TARGET- \
+	INSTALL_HDR_PATH=$SYSROOT/usr
+
+# ex: ts=4 sw=4 ft=sh
