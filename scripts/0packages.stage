@@ -1,0 +1,25 @@
+cd $SRC
+
+# binutils
+if [[ ! -f $(basename $BINUTILS_URL) ]]; then
+	wget -O $(basename $BINUTILS_URL) $BINUTILS_URL
+fi
+
+# gcc
+if [[ ! -f $(basename $GCC_URL) ]]; then
+	wget -O $(basename $GCC_URL) $GCC_URL
+fi
+
+# linux
+if [[ ! -f $(basename $LINUX_URL) ]]; then
+	wget -O $(basename $LINUX_URL) $LINUX_URL
+fi
+
+# eglibc export with svn
+if [[ ! -d egblic-${EGLIBC_VER} ]]; then
+	rm -rf eglibc-${EGLIBC_VER}
+	svn export $EGLIBC_URL/libc $(basename $EGLIBC_URL)
+	svn export $EGLIBC_URL/ports $(basename $EGLIBC_URL)/ports
+fi
+
+# ex: ts=4 sw=4 ft=sh

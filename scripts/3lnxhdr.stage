@@ -1,4 +1,4 @@
-_prepare linux ${LINUX_VERSION}
+_prepare linux ${LINUX_VER} ${LINUX_URL}
 
 PATH=$TOOLS/bin:$PATH make headers_install \
 	ARCH=arm CROSS_COMPILE=$TARGET- \

@@ -7,25 +7,24 @@ _prepare()
 {
 	local name=$1
 	local version=$2
+	local pkg=$(basename $3)
 
 	local a p
 
-	if [[ $SRC/${name}-${version}.tar.bz2 ]]; then
-		# main package
-		tar xvf $SRC/${name}-${version}.tar.bz2
-		# add-ons
-		for a in $SRC/${name}-*-${version}.tar.bz2; do
-			if [[ -f $a ]]; then
-				tar xvf $a -C ${name}-${version}
-			fi
-		done
+	if [[ ! -d ${name}-${version} ]]; then
+		if [[ -f $SRC/$pkg ]]; then
+			tar xvf $SRC/$pkg
+		elif [[ -d $SRC/$pkg ]]; then
+			cp -a $SRC/$pkg ${name}-${version}
+		fi
 		# patches
 		for p in `find $SRC/patches/${name}/${version} -name "*.patch"`; do
 			patch -d ${name}-${version} -p1 < $p
 		done
-
-		cd ${name}-${version}
 	fi
+
+
+	cd ${name}-${version}
 }
 
 . $TOP/scripts/$1.stage || { echo "ERROR on stage $1"; exit 1; }

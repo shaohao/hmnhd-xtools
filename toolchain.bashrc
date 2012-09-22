@@ -1,8 +1,13 @@
-export BINUTILS_VERSION=2.18
-export LINUX_VERSION=2.6.31.14
-export EGLIBC_VERSION=2.7
-export GCC_VERSION=4.3.2
-export BUSYBOX_VERSION=1.20.2
+export BINUTILS_VER=2.18
+export BINUTILS_URL=ftp://ftp.gnu.org/gnu/binutils/binutils-${BINUTILS_VER}.tar.bz2
+export LINUX_VER=2.6.31.14
+export LINUX_URL=ftp://ftp.kernel.org/pub/linux/kernel/v${LINUX_VER:0:3}/linux-${LINUX_VER}.tar.xz
+export EGLIBC_VER=2.7
+export EGLIBC_URL=svn://svn.eglibc.org/branches/eglibc-${EGLIBC_VER/./_}
+export GCC_VER=4.3.2
+export GCC_URL=ftp://ftp.gnu.org/gnu/gcc/gcc-${GCC_VER}/gcc-${GCC_VER}.tar.bz2
+export BUSYBOX_VER=1.20.2
+export BUSYBOX_URL=http://www.busybox.net/downloads/busybox-${BUSYBOX_VER}.tar.bz2
 
 export BUILD=x86_64-pc-linux-gnu
 export HOST=$BUILD

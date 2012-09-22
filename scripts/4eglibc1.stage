@@ -1,4 +1,4 @@
-_prepare eglibc ${EGLIBC_VERSION}
+_prepare eglibc ${EGLIBC_VER} ${EGLIBC_URL}
 
 rm -rf eglibc-build1
 mkdir -p eglibc-build1

@@ -1,4 +1,4 @@
-_prepare binutils ${BINUTILS_VERSION}
+_prepare binutils ${BINUTILS_VER} ${BINUTILS_URL}
 
 rm -rf binutils-build
 mkdir -p binutils-build

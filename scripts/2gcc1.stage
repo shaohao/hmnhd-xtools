@@ -1,4 +1,4 @@
-_prepare gcc ${GCC_VERSION}
+_prepare gcc ${GCC_VER} ${GCC_URL}
 
 rm -rf gcc-build1
 mkdir -p gcc-build1
